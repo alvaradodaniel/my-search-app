@@ -6,13 +6,17 @@ export default function HomePage() {
   const [dogs, setDogs] = useState([]);
 
   useEffect(() => {
-    if (!search) return;
-    fetch(`https://api.thedogapi.com/v1/breeds/search?q=${search}`, {
-      headers: {
-        "x-api-key":
-          "live_Ji4Tz4PG5jKj3nkNTlCjrKgxtAhuFxTd9lSBLGM2V7AtFgi5hSuYxMfObm9g58NX",
-      },
-    })
+    fetch(
+      `https://api.thedogapi.com/v1/breeds${
+        search ? "/search?q=" + search : ""
+      }`,
+      {
+        headers: {
+          "x-api-key":
+            "live_Ji4Tz4PG5jKj3nkNTlCjrKgxtAhuFxTd9lSBLGM2V7AtFgi5hSuYxMfObm9g58NX",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setDogs(data));
   }, [search]);
