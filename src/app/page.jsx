@@ -6,7 +6,8 @@ export default function HomePage() {
   const [dogs, setDogs] = useState([]);
 
   useEffect(() => {
-    fetch("https://api.thedogapi.com/v1/breeds?limit=40", {
+    if (!search) return;
+    fetch(`https://api.thedogapi.com/v1/breeds/search?q=${search}`, {
       headers: {
         "x-api-key":
           "live_Ji4Tz4PG5jKj3nkNTlCjrKgxtAhuFxTd9lSBLGM2V7AtFgi5hSuYxMfObm9g58NX",
@@ -14,11 +15,7 @@ export default function HomePage() {
     })
       .then((res) => res.json())
       .then((data) => setDogs(data));
-  }, []);
-
-  const filtered = dogs.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase())
-  );
+  }, [search]);
 
   return (
     <main className="bg-gray-100 min-h-screen flex justify-center items-center p-4">
@@ -34,7 +31,7 @@ export default function HomePage() {
         </div>
         <div className="overflow-y-auto p-4 flex-1">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {filtered.map((item) => (
+            {dogs.map((item) => (
               <div
                 key={item.id}
                 className="bg-blue-50 rounded-xl shadow-md overflow-hidden hover:scale-105 transition-transform duration-300"
@@ -45,7 +42,7 @@ export default function HomePage() {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-4">
-                  <h2 className="font-bold text-lg text-blue-700">
+                  <h2 className="font-bold text-lg text-green-700">
                     {item.name}
                   </h2>
                   <p className="text-sm text-gray-600 mt-1">
