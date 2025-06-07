@@ -18,3 +18,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 This is a practice using a dogs API and a search functionality.
+
+https://github.com/user-attachments/assets/ad4fa927-c40d-428f-b576-12cb19f2ba05
+
